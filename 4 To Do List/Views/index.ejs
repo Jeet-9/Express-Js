@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            background-color: bisque;
+            color: chocolate;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid chocolate;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+
+    <form action="/addTask" method="post">
+        <input type="text" placeholder="Enter Task Description" name="description" required />
+        <select name="status" required>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+        </select>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Task ID</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% tasks.forEach((task) => { %>
+                <tr>
+                    <td><%= task.id %></td>
+                    <td><%= task.description %></td>
+                    <td><%= task.status %></td>
+                    <td>
+                        <a href="/editTask/<%= task.id %>">Edit</a>
+                    </td>
+                    <td>
+                        <a href="/deleteTask?id=<%= task.id %>">Delete</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>
